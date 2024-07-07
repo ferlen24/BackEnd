@@ -26,6 +26,9 @@ app.get('/index',(req,res)=>{
 app.get('/carta.html',(req,res)=>{
     res.sendFile(__dirname + '/public/html/carta.html')
 })
+app.get('/reserva.html',(req,res)=>{
+    res.sendFile(__dirname + '/public/html/reserva.html')
+})
 
 const PORT = 3000;
 

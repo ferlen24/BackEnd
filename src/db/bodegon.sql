@@ -1,4 +1,3 @@
--- Volcando estructura de base de datos para bodegon
 CREATE DATABASE IF NOT EXISTS `bodegon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bodegon`;
 
@@ -58,3 +57,13 @@ CREATE TABLE IF NOT EXISTS `log` (
   CONSTRAINT `FK_log_clientes` FOREIGN KEY (`idcliente`) REFERENCES `clientes` (`idcliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla bodegon.productos
+CREATE TABLE IF NOT EXISTS `productos` (
+  `idcarta` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL DEFAULT '0',
+  `precio` double NOT NULL DEFAULT '0',
+  `imagen` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idcarta`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
