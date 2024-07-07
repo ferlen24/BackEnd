@@ -1,6 +1,6 @@
 
         // Cargar datos desde el archivo JSON
-        fetch('cartajson/carta.json')
+        fetch('http://localhost:3000/clientes/carta')
             .then(response => response.json())
             .then(data => {
                 const menuList = document.getElementById('CartaTarjetas');

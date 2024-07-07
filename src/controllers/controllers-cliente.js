@@ -53,10 +53,19 @@ const deleteCliente = (req, res) => {
     });
 };
 
+const getAllProductos = (req, res) => {
+    const sql = 'SELECT * FROM productos';
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+        res.json(results);
+    });
+};
+
 module.exports = {
     getAllClientes,
     getClienteById,
     createCliente,
     updateCliente,
-    deleteCliente
+    deleteCliente,
+    getAllProductos
 };
