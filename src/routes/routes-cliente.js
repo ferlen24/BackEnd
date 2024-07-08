@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const clienteController = require('../controllers/controllers-cliente');
 
+
 // debe llamarse de la misma forma los id
 router.get('/carta', clienteController.getAllProductos);
 router.get('/', clienteController.getAllClientes);

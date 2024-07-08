@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // src/routes/routers-cliente.js
 const clienteRoutes = require('./src/routes/routes-cliente');
 
+app.use(express.json());
 
 //app.use(express.json());
 app.use('/clientes', clienteRoutes);

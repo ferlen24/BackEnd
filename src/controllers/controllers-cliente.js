@@ -25,14 +25,26 @@ const getClienteById = (req, res) => {
     });
 };
 
+/*   const nombre = document.getElementById('nombre').value;
+          const apellido = document.getElementById('apellido').value;
+          const telefono = document.getElementById('telefono').value;
+          const direccion = document.getElementById('direccion').value;
+          const localidad = document.getElementById('localidad').value;
+          const provincia = document.getElementById('provincia').value;
+          const email = document.getElementById('email').value;
+          const mensaje = document.getElementById('mensaje').value;*/
+
 const createCliente = (req, res) => {
-    const { nombre,apellido, sexo, fecha_nacimiento,numero_dni,user,pass } = req.body;
-    const sql = 'INSERT INTO clientes (nombre, apellido, sexo, fecha_nacimiento,numero_dni,user,pass) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    db.query(sql, [ nombre,apellido, sexo, fecha_nacimiento,numero_dni,user,pass], (err, result) => {
+    const { nombre, apellido, telefono, direccion,localidad,provincia,email,mensaje } = req.body;
+    const sql = 'INSERT INTO clientes (nombre, apellido, telefono, direccion,localidad,provincia,email,mensaje) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    db.query(sql, [ nombre, apellido, telefono, direccion,localidad,provincia,email,mensaje], (err, result) => {
         if (err) throw err;
         res.json({ message: 'Movie created', movieId: result.insertId });
     });
 };
+
+
+
 
 const updateCliente = (req, res) => {
     const { id } = req.params;
