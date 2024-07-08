@@ -34,17 +34,15 @@ const getClienteById = (req, res) => {
           const email = document.getElementById('email').value;
           const mensaje = document.getElementById('mensaje').value;*/
 
-const createCliente = (req, res) => {
-    const { nombre, apellido, telefono, direccion,localidad,provincia,email,mensaje } = req.body;
-    const sql = 'INSERT INTO clientes (nombre, apellido, telefono, direccion,localidad,provincia,email,mensaje) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    db.query(sql, [ nombre, apellido, telefono, direccion,localidad,provincia,email,mensaje], (err, result) => {
-        if (err) throw err;
-        res.json({ message: 'Movie created', movieId: result.insertId });
-    });
-};
-
-
-
+          const createCliente = (req, res) => {
+            const { nombre, apellido, telefono, direccion, localidad, provincia, email, mensaje } = req.body;
+            console.log(req.body); // Verifica los datos recibidos
+            const sql = 'INSERT INTO clientes (nombre, apellido, telefono, direccion, localidad, provincia, email, mensaje) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+            db.query(sql, [nombre, apellido, telefono, direccion, localidad, provincia, email, mensaje], (err, result) => {
+                if (err) throw err;
+                res.json({ message: 'Cliente creado', clienteId: result.insertId });
+            });
+        };
 
 const updateCliente = (req, res) => {
     const { id } = req.params;
