@@ -21,7 +21,7 @@ app.use(express.json());
 //app.use(express.json());
 app.use('/clientes', clienteRoutes);
 
-app.get('/index',(req,res)=>{
+app.get('/index.html',(req,res)=>{
     res.sendFile(__dirname + '/public/html/index.html')
 })
 app.get('/carta.html',(req,res)=>{
