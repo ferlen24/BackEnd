@@ -1,6 +1,6 @@
 
         // Cargar datos desde el archivo JSON
-        fetch('http://localhost:3000/clientes/carta')
+        fetch('https://backend-ldzw.onrender.com/clientes/carta')
             .then(response => response.json())
             .then(data => {
                 const menuList = document.getElementById('CartaTarjetas');
