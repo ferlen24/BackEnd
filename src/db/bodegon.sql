@@ -1,3 +1,4 @@
+
 -- Volcando estructura de base de datos para bodegon
 CREATE DATABASE IF NOT EXISTS `bodegon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bodegon`;
@@ -5,13 +6,13 @@ USE `bodegon`;
 -- Volcando estructura para tabla bodegon.clientes
 CREATE TABLE IF NOT EXISTS `clientes` (
   `idcliente` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) DEFAULT NULL,
-  `apellido` varchar(255) DEFAULT NULL,
-  `telefono` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nombre` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `apellido` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `telefono` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `direccion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `Localidad` varchar(150) DEFAULT NULL,
-  `Provincia` varchar(150) DEFAULT NULL,
-  `email` varchar(150) DEFAULT NULL,
+  `Localidad` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Provincia` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `mensaje` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`idcliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -44,10 +45,11 @@ CREATE TABLE IF NOT EXISTS `productos` (
 -- Volcando estructura para tabla bodegon.reserva
 CREATE TABLE IF NOT EXISTS `reserva` (
   `idreserva` int NOT NULL AUTO_INCREMENT,
-  `idcliente` int DEFAULT NULL,
-  `local` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `fecha` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `cantidadPersonas` int DEFAULT NULL,
+  `idcliente` int NOT NULL,
+  `local` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time NOT NULL,
+  `cantidadPersonas` int NOT NULL,
   `observaciones` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idreserva`) USING BTREE,
   KEY `FK_direcciones_clientes` (`idcliente`),
