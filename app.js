@@ -38,5 +38,5 @@ const PORT = process.env.PORT || 3000;
 
 
 app.listen(PORT, () => {
-    console.log(`El servidor esta encendidor en http://localhost:${PORT}/ `)
+    console.log(`El servidor esta encendidor en http://localhost:${PORT}/index.html `)
 });
