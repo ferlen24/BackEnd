@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+require('dotenv').config();
 
 
 const app = express();
@@ -33,7 +34,7 @@ app.get('/reserva.html',(req,res)=>{
     res.sendFile(__dirname + '/public/html/reserva.html')
 })
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 
 app.listen(PORT, () => {
