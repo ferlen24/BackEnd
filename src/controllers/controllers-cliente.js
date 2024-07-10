@@ -46,7 +46,7 @@ const getClienteById = (req, res) => {
 const updateCliente = (req, res) => {
     const { id } = req.params;
     const { nombre, apellido, telefono, direccion, localidad, provincia, email, mensaje } = req.body;
-    const sql = 'UPDATE clientes SET nombre= ?, apellido= ?, telefono= ?, direccion= ?, localidad= ?, provincia= ?, email= ?, mensaje= ?,  WHERE idcliente = ?';
+    const sql = 'UPDATE clientes SET nombre= ?, apellido= ?, telefono= ?, direccion= ?, localidad= ?, provincia= ?, email= ?, mensaje= ?  WHERE idcliente = ?';
     db.query(sql, [nombre, apellido, telefono, direccion, localidad, provincia, email, mensaje,id ], (err, result) => {
         if (err) throw err;
         res.json({ message: 'cliente actualizado' });
