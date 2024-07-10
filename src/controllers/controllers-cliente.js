@@ -47,7 +47,7 @@ const getClienteById = (req, res) => {
 const updateCliente = (req, res) => {
     const { id } = req.params;
     const { titulo, descripcion, fecha_lanzamiento, director } = req.body;
-    const sql = 'UPDATE peliculas SET nombre = ?, apellido = ?,  WHERE idcliente = ?';
+    const sql = 'UPDATE clientes SET nombre = ?, apellido = ?,  WHERE idcliente = ?';
     db.query(sql, [titulo,descripcion, fecha_lanzamiento, director,id ], (err, result) => {
         if (err) throw err;
         res.json({ message: 'Movie updated' });
@@ -56,18 +56,43 @@ const updateCliente = (req, res) => {
 
 const deleteCliente = (req, res) => {
     const { id } = req.params;
-    const sql = 'DELETE FROM peliculas WHERE id_pelicula = ?'; 
+    const sql = 'DELETE FROM clientes WHERE id_pelicula = ?'; 
     db.query(sql, [id], (err, result) => {
         if (err) throw err;
         res.json({ message: 'Movie deleted' });
     });
 };
 
+// const getAllProductos = (req, res) => {
+//     const sql = 'SELECT categorias.nombre,categorias.detalle, productos.idporducto,productos.nombre,precio,imagen FROM productos JOIN categorias USING (idcategoria) ORDER BY categorias.nombre,productos.idporducto';
+//     db.query(sql, (err, results) => {
+//         if (err) throw err;
+//         res.json(results);
+//     });
+// };
 const getAllProductos = (req, res) => {
-    const sql = 'SELECT * FROM productos';
+    const sql = 'SELECT categorias.nombre AS categoria, categorias.detalle, productos.idporducto AS idproducto, productos.nombre AS producto, precio, imagen FROM productos JOIN categorias USING (idcategoria) ORDER BY categorias.nombre';
     db.query(sql, (err, results) => {
         if (err) throw err;
-        res.json(results);
+        
+        // Reestructurar los resultados
+        const groupedResults = results.reduce((acc, row) => {
+            if (!acc[row.categoria]) {
+                acc[row.categoria] = {
+                    detalle: row.detalle,
+                    productos: []
+                };
+            }
+            acc[row.categoria].productos.push({
+                idproducto: row.idproducto,
+                nombre: row.producto,
+                precio: row.precio,
+                imagen: row.imagen
+            });
+            return acc;
+        }, {});
+
+        res.json(groupedResults);
     });
 };
 
