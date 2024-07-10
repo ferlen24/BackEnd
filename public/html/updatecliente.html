@@ -117,7 +117,7 @@
 document.getElementById('buscarCliente').addEventListener('click', function() {
       const clienteId = document.getElementById('numerocliente').value;
 
-      fetch(`http://localhost:3000/clientes/${clienteId}`)
+      fetch(`https://backend-ldzw.onrender.com/clientes/${clienteId}`)
         .then(response => response.json())
         .then(data => {
           document.getElementById('nombre').value = data.nombre;
