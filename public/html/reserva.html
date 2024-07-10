@@ -88,59 +88,109 @@
         </form>
       </div>
 
+      <!-- Modal de Cliente -->
+      <div id="modal" class="modal" style="display: none">
+        <div class="modal-content">
+          <h4 style="color: #007bff;text-align:center; font-size: 24px;">Alta </h4>
+          <h5 style="color: #0a3461;text-align:center; font-size: 20px;">Por favor tome nota de su numero de cliente</h5>
+          <p style="color: #3581be;text-align:center; font-size: 30px" id="modal-message"></p>
+        </div>
+        <div class="modal-footer">
+          <button id="close-modal" class="btn">Cerrar</button>
+        </div>
+      </div>
+
       <script>
+        document
+          .getElementById("contact-form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault(); 
 
-        document.getElementById('contact-form').addEventListener('submit', function (event) {
-          event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById("apellido").value;
+            const telefono = document.getElementById("telefono").value;
+            const direccion = document.getElementById("direccion").value;
+            const localidad = document.getElementById("localidad").value;
+            const provincia = document.getElementById("provincia").value;
+            const email = document.getElementById("email").value;
+            const mensaje = document.getElementById("mensaje").value;
 
-          // Capturar los datos del formulario
-          const nombre = document.getElementById('nombre').value;
-          const apellido = document.getElementById('apellido').value;
-          const telefono = document.getElementById('telefono').value;
-          const direccion = document.getElementById('direccion').value;
-          const localidad = document.getElementById('localidad').value;
-          const provincia = document.getElementById('provincia').value;
-          const email = document.getElementById('email').value;
-          const mensaje = document.getElementById('mensaje').value;
-          
-          console.log(nombre);
-          console.log(apellido);
+            console.log(nombre);
+            console.log(apellido);
 
-          // Crear un objeto con los datos del formulario
-          const formData = {
-            nombre: nombre,
-            apellido: apellido,
-            telefono: telefono,
-            direccion: direccion,
-            localidad: localidad,
-            provincia: provincia,
-            email: email,
-            mensaje: mensaje
-          };
+            // Crear un objeto
+            const formData = {
+              nombre: nombre,
+              apellido: apellido,
+              telefono: telefono,
+              direccion: direccion,
+              localidad: localidad,
+              provincia: provincia,
+              email: email,
+              mensaje: mensaje,
+            };
 
-          // Enviar los datos al servidor utilizando fetch
-          fetch('https://backend-ldzw.onrender.com/clientes', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-          })
-            .then(response => response.json())
-            .then(data => {
-              console.log('Success:', data);
-              alert('Reserva enviada con éxito');
-              // Ver que ponemos si ponemos una pantalla donde diga reserva generada o que
+            // Enviar los datos al servidor utilizando fetch
+            fetch("https://backend-ldzw.onrender.com/clientes", {
+           // fetch("http://localhost:3000/clientes", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
             })
-            .catch((error) => {
-              console.error('Error:', error);
-              alert('Error al enviar la reserva');
-            });
-        });
+              .then((response) => response.json())
+              .then((data) => {
+                console.log("Success:", data);
+                // alert("Reserva enviada con éxito");
+
+                // Limpio el formulario
+                document.getElementById("contact-form").reset();
+
+                // Mostrar el modal con el número de ingreso de reserva
+                document.getElementById('modal-message').textContent = `Número: ${data.clienteId}`;
+                document.getElementById('modal').style.display = 'block';
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("Error al enviar la reserva");
+              });
+          });
+
+            document.getElementById("close-modal").addEventListener("click", function () {
+            document.getElementById("modal").style.display = "none";
+            window.location.href = 'index.html'; 
+          });
       </script>
-
-
     </section>
+
+    <style>
+      .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      }
+      .modal-content {
+        margin-bottom: 40px;
+      }
+      .modal-footer {
+        text-align: center;
+      }
+      .modal .btn {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      
+    </style>
+
   </main>
   <footer class="footer">
     <div class="footer-logo">
