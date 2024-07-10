@@ -1,7 +1,17 @@
 
--- Volcando estructura de base de datos para bodegon
+- Volcando estructura de base de datos para bodegon
 CREATE DATABASE IF NOT EXISTS `bodegon` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bodegon`;
+
+-- Volcando estructura para tabla bodegon.categorias
+CREATE TABLE IF NOT EXISTS `categorias` (
+  `idcategoria` int NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `detalle` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`idcategoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla bodegon.clientes
 CREATE TABLE IF NOT EXISTS `clientes` (
@@ -33,11 +43,14 @@ CREATE TABLE IF NOT EXISTS `log` (
 
 -- Volcando estructura para tabla bodegon.productos
 CREATE TABLE IF NOT EXISTS `productos` (
-  `idcarta` int NOT NULL AUTO_INCREMENT,
+  `idporducto` int NOT NULL AUTO_INCREMENT,
+  `idcategoria` int DEFAULT NULL,
   `nombre` varchar(50) NOT NULL DEFAULT '0',
   `precio` double NOT NULL DEFAULT '0',
   `imagen` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
-  PRIMARY KEY (`idcarta`)
+  PRIMARY KEY (`idporducto`) USING BTREE,
+  KEY `FK_productos_categorias` (`idcategoria`),
+  CONSTRAINT `FK_productos_categorias` FOREIGN KEY (`idcategoria`) REFERENCES `categorias` (`idcategoria`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- La exportación de datos fue deseleccionada.
