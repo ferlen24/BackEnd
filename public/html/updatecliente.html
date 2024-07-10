@@ -113,9 +113,11 @@
       </div>
 
       <script>
-        const clienteId = document.getElementById('numerocliente').value;
+        
         document.getElementById('buscarCliente').addEventListener('click', function () {
-
+          
+          const clienteId = document.getElementById('numerocliente').value;
+          
           fetch(`https://backend-ldzw.onrender.com/clientes/${clienteId}`)
             .then(response => response.json())
             .then(data => {
@@ -162,8 +164,7 @@
 
 
 
-            // Enviar los datos al servidor utilizando fetch
-
+            console.log(clienteId);
             fetch(`https://backend-ldzw.onrender.com/clientes/${clienteId}`, {
               // fetch("http://localhost:3000/clientes", {
               method: 'PUT',
