@@ -10,7 +10,7 @@ const getAllClientes = (req, res) => {
 
 const getClienteById = (req, res) => {
     const { id } = req.params;
-    const sql = 'SELECT nombre,apellido FROM clientes WHERE idcliente = ?';
+    const sql = 'SELECT nombre, apellido, telefono, direccion, localidad, provincia, email, mensaje FROM clientes WHERE idcliente = ?';
     console.log('ID del cliente recibido:', id);
     db.query(sql, [id], (err, results) => {
         if (err) {
