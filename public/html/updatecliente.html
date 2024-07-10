@@ -50,7 +50,7 @@
       <div class="container">
         <label style="color: #f1f3f5" for="numerocliente">Numero de Cliente <span class="required">*</span></label>
         <input class="form-control" placeholder="Numero de Cliente" id="usuario" />
-
+        <button id="buscarCliente" class="btn-submit flip-scale-down-ver">Buscar Cliente</button>
       </div>
     </section>
 
@@ -114,34 +114,25 @@
 
       <script>
 
-        function buscarCliente() {
-          const clienteId = document.getElementById('numerocliente').value;
+document.getElementById('buscarCliente').addEventListener('click', function() {
+      const clienteId = document.getElementById('numerocliente').value;
 
-          fetch(`https://backend-ldzw.onrender.com/clientes/${clienteId}', {
-`)
-            .then(response => response.json())
-            .then(data => {
-              data.forEach((cliente) => {
-              document.getElementById('nombre').value = cliente.nombre;
-              document.getElementById('apellido').value = cliente.apellido;
-              document.getElementById('telefono').value = cliente.telefono;
-              document.getElementById('direccion').value = cliente.direccion;
-              document.getElementById('localidad').value = cliente.localidad;
-              document.getElementById('provincia').value = cliente.provincia;
-              document.getElementById('email').value = cliente.email;
-              document.getElementById('mensaje').value = cliente.mensaje;
-            })  
-            })
-            .catch(error => console.error('Error fetching client data:', error));
-        }
+      fetch(`http://localhost:3000/clientes/${clienteId}`)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('nombre').value = data.nombre;
+          document.getElementById('apellido').value = data.apellido;
+          document.getElementById('telefono').value = data.telefono;
+          document.getElementById('direccion').value = data.direccion;
+          document.getElementById('localidad').value = data.localidad;
+          document.getElementById('provincia').value = data.provincia;
+          document.getElementById('email').value = data.email;
+          document.getElementById('mensaje').value = data.mensaje;
+        })
+        .catch(error => console.error('Error fetching client data:', error));
+    });
 
-        document.getElementById('numerocliente').addEventListener('keydown', function (event) {
-          if (event.key === 'Enter' || event.key === 'Tab') {
-            event.preventDefault();
-            buscarCliente();
-          }
-        });
-
+    
         document
           .getElementById('contact-form')
           .addEventListener('submit', function (event) {
