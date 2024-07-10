@@ -33,6 +33,9 @@ app.get('/carta.html',(req,res)=>{
 app.get('/reserva.html',(req,res)=>{
     res.sendFile(__dirname + '/public/html/reserva.html')
 })
+app.get('/deletecliente.html',(req,res)=>{
+    res.sendFile(__dirname + '/public/html/deletecliente.html')
+})
 
 const PORT = process.env.PORT || 3000;
 

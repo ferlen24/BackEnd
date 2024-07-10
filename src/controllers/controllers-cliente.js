@@ -11,7 +11,7 @@ const getAllClientes = (req, res) => {
 
 const getClienteById = (req, res) => {
     const { id } = req.params;
-    const sql = 'SELECT * FROM clientes WHERE idcliente = ?';
+    const sql = 'SELECT nombre,apellido FROM clientes WHERE idcliente = ?';
     console.log('ID del cliente recibido:', id);
     db.query(sql, [id], (err, results) => {
         if (err) {
@@ -50,16 +50,16 @@ const updateCliente = (req, res) => {
     const sql = 'UPDATE clientes SET nombre = ?, apellido = ?,  WHERE idcliente = ?';
     db.query(sql, [titulo,descripcion, fecha_lanzamiento, director,id ], (err, result) => {
         if (err) throw err;
-        res.json({ message: 'Movie updated' });
+        res.json({ message: 'cliente actualizado' });
     });
 };
 
 const deleteCliente = (req, res) => {
     const { id } = req.params;
-    const sql = 'DELETE FROM clientes WHERE id_pelicula = ?'; 
+    const sql = 'DELETE FROM clientes WHERE idcliente = ?'; 
     db.query(sql, [id], (err, result) => {
         if (err) throw err;
-        res.json({ message: 'Movie deleted' });
+        res.json({ message: 'Cliente eliminado' });
     });
 };
 
