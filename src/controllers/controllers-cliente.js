@@ -1,4 +1,3 @@
-// src/controllers/movieController.js
 const db = require('../db/db');
 
 const getAllClientes = (req, res) => {
@@ -46,9 +45,9 @@ const getClienteById = (req, res) => {
 
 const updateCliente = (req, res) => {
     const { id } = req.params;
-    const { titulo, descripcion, fecha_lanzamiento, director } = req.body;
+    const { nombre, apellido } = req.body;
     const sql = 'UPDATE clientes SET nombre = ?, apellido = ?,  WHERE idcliente = ?';
-    db.query(sql, [titulo,descripcion, fecha_lanzamiento, director,id ], (err, result) => {
+    db.query(sql, [nombre, apellido,id ], (err, result) => {
         if (err) throw err;
         res.json({ message: 'cliente actualizado' });
     });
