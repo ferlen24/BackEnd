@@ -93,22 +93,21 @@
           fetch(`https://backend-ldzw.onrender.com/clientes/${clienteId}`)
             .then((response) => response.json())
             .then((data) => {
-              data.forEach((cliente) => {
-                if(cliente.error){
+              if(data.error){
+
                   alert("Cliente no encontrado o datos incompletos");
+                
                 }else{
-                  confirmarEliminacion(cliente, clienteId);
+                  data.forEach((cliente) => {
+                 if (cliente && cliente.nombre && cliente.apellido ) {
+                //   //       mostrarClienteEnAlert(cliente);
+                   confirmarEliminacion(cliente, clienteId);
+                 } else {
+                   alert("Cliente no encontrado o datos incompletos");
+                 }
+              });
                 }
 
-                // if (cliente && cliente.nombre && cliente.apellido ) {
-                //   //       mostrarClienteEnAlert(cliente);
-                //   confirmarEliminacion(cliente, clienteId);
-                // } else {
-                //   alert("Cliente no encontrado o datos incompletos");
-                // }
-
-
-              });
             });
         }
 
