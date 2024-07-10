@@ -71,7 +71,7 @@ const deleteCliente = (req, res) => {
 //     });
 // };
 const getAllProductos = (req, res) => {
-    const sql = 'SELECT categorias.nombre AS categoria, categorias.detalle, productos.idporducto AS idproducto, productos.nombre AS producto, precio, imagen FROM productos JOIN categorias USING (idcategoria) ORDER BY categorias.nombre';
+    const sql = 'SELECT categorias.nombre AS categoria, categorias.detalle, productos.idproducto AS idproducto, productos.nombre AS producto, precio, imagen FROM productos JOIN categorias USING (idcategoria) ORDER BY categorias.nombre';
     db.query(sql, (err, results) => {
         if (err) throw err;
         
