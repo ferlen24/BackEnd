@@ -113,28 +113,27 @@
       </div>
 
       <script>
+        const clienteId = document.getElementById('numerocliente').value;
+        document.getElementById('buscarCliente').addEventListener('click', function () {
 
-document.getElementById('buscarCliente').addEventListener('click', function() {
-      const clienteId = document.getElementById('numerocliente').value;
+          fetch(`https://backend-ldzw.onrender.com/clientes/${clienteId}`)
+            .then(response => response.json())
+            .then(data => {
+              data.forEach((cliente) => {
+                document.getElementById('nombre').value = cliente.nombre;
+                document.getElementById('apellido').value = cliente.apellido;
+                document.getElementById('telefono').value = cliente.telefono;
+                document.getElementById('direccion').value = cliente.direccion;
+                document.getElementById('localidad').value = cliente.localidad;
+                document.getElementById('provincia').value = cliente.provincia;
+                document.getElementById('email').value = cliente.email;
+                document.getElementById('mensaje').value = cliente.mensaje;
+              })
+            })
+            .catch(error => console.error('Error fetching client data:', error));
+        });
 
-      fetch(`https://backend-ldzw.onrender.com/clientes/${clienteId}`)
-        .then(response => response.json())
-        .then(data => {
-          data.forEach((cliente) => {
-          document.getElementById('nombre').value = cliente.nombre;
-          document.getElementById('apellido').value = cliente.apellido;
-          document.getElementById('telefono').value = cliente.telefono;
-          document.getElementById('direccion').value = cliente.direccion;
-          document.getElementById('localidad').value = cliente.localidad;
-          document.getElementById('provincia').value = cliente.provincia;
-          document.getElementById('email').value = cliente.email;
-          document.getElementById('mensaje').value = cliente.mensaje;
-        })
-      })
-        .catch(error => console.error('Error fetching client data:', error));
-    });
 
-    
         document
           .getElementById('contact-form')
           .addEventListener('submit', function (event) {
@@ -161,10 +160,10 @@ document.getElementById('buscarCliente').addEventListener('click', function() {
               mensaje: mensaje
             }
 
-            
+
 
             // Enviar los datos al servidor utilizando fetch
-            
+
             fetch(`https://backend-ldzw.onrender.com/clientes/${clienteId}`, {
               // fetch("http://localhost:3000/clientes", {
               method: 'PUT',
